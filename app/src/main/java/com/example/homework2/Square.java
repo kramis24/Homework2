@@ -1,7 +1,18 @@
 package com.example.homework2;
+/**
+ * Square
+ * Defines variables for the squares in the grid as objects.
+ *
+ * @author Dylan Kramis
+ * @version 9/24/2021 Basic Version
+ *
+ * Enhancements: none yet, size slider planned
+ * Issues: resets when screen rotates
+ */
 
 public class Square {
 
+    // define zero as the empty space
     public static final int EMPTY = 0;
 
     // public variables for each square, number and positions
@@ -11,7 +22,16 @@ public class Square {
     public float right;
     public float bottom;
 
-    // constructor
+    /**
+     * Square
+     * Constructor for Square object, information required.
+     *
+     * @param number number assigned to square
+     * @param left left edge
+     * @param top top edge
+     * @param right right edge
+     * @param bottom bottom edge
+     */
     public Square(int number, float left, float top, float right, float bottom) {
 
         this.number = number;

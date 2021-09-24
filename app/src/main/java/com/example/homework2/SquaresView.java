@@ -1,4 +1,14 @@
 package com.example.homework2;
+/**
+ * SquaresView
+ * View of squares puzzle, draws the puzzle in its current state.
+ *
+ * @author Dylan Kramis
+ * @version 9/24/2021 Basic Version
+ *
+ * Enhancements: none yet, size slider planned
+ * Issues: resets when screen rotates
+ */
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -32,6 +42,14 @@ public class SquaresView extends SurfaceView {
     // state/model
     private SquaresState gameState;
 
+    /**
+     * SquaresView
+     * Constructor for the SquaresView object, sets up variables
+     * necessary for operation.
+     *
+     * @param context
+     * @param attrs
+     */
     public SquaresView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -53,6 +71,12 @@ public class SquaresView extends SurfaceView {
         gameState = new SquaresState();
     }
 
+    /**
+     * onDraw
+     * Draws everything in the SquaresView object.
+     *
+     * @param canvas does the drawing
+     */
     @SuppressLint("DrawAllocation")
     public void onDraw(Canvas canvas) {
         // setting center
@@ -106,6 +130,14 @@ public class SquaresView extends SurfaceView {
         }
     }
 
+    /**
+     * drawSquare
+     * Helper method for onDraw, draws the numbered squares making up
+     * the grid of tiles.
+     *
+     * @param sq Square object being drawn, holds boundary info
+     * @param canvas does the drawing
+     */
     protected void drawSquare(Square sq, Canvas canvas) {
 
         // draws square slightly smaller than given, gray if number is empty
@@ -124,6 +156,11 @@ public class SquaresView extends SurfaceView {
         }
     }
 
+    /**
+     * initializeTiles
+     * Helper method for onDraw, initializes numbers and boundaries
+     * for each tile in game state.
+     */
     protected void initializeTiles() {
 
         // initializing tile array
@@ -141,11 +178,19 @@ public class SquaresView extends SurfaceView {
         }
     }
 
+    /**
+     * randomize
+     * Helper method for initializeTiles, recursively generates a random number
+     * that hasn't already been taken by another tile.
+     *
+     * @return unique randomized int
+     */
     protected int randomize() {
+
         // sets number to a random value
         int num = (int) Math.round((Math.pow(gridSize, 2) - 1) * Math.random());
 
-        // verifies that the number is not a repeat, rerolls if it is
+        // verifies that the number is not a repeat, recursively rerolls if it is
         for (int i = 0; i < gameState.tiles.length; i++) {
             for (int j = 0; j < gameState.tiles[i].length; j++) {
                 if (gameState.tiles[i][j] != null) {
@@ -159,10 +204,23 @@ public class SquaresView extends SurfaceView {
         return num;
     }
 
+    /**
+     * getSquaresState
+     * Returns the game state of the squares puzzle.
+     *
+     * @return game state of the squares puzzle
+     */
     public SquaresState getSquaresState() {
         return gameState;
     }
 
+    /**
+     * checkWin
+     * Helper method for onDraw, checks for differences between the current grid
+     * of squares and the game state's win condition.
+     *
+     * @return true if game won, false otherwise.
+     */
     protected boolean checkWin() {
 
         // looks for tiles that don't match

@@ -1,4 +1,14 @@
 package com.example.homework2;
+/**
+ * SquaresState
+ * Game state/model of squares puzzle, stores game info.
+ *
+ * @author Dylan Kramis
+ * @version 9/24/2021 Basic Version
+ *
+ * Enhancements: none yet, size slider planned
+ * Issues: resets when screen rotates
+ */
 
 public class SquaresState {
 

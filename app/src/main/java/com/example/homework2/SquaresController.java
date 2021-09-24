@@ -1,4 +1,14 @@
 package com.example.homework2;
+/**
+ * SquaresController
+ * Controller of squares puzzle, handles inputs.
+ *
+ * @author Dylan Kramis
+ * @version 9/24/2021 Basic Version
+ *
+ * Enhancements: none yet, size slider planned
+ * Issues: resets when screen rotates
+ */
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,17 +19,32 @@ public class SquaresController implements View.OnTouchListener, View.OnClickList
     private SquaresView squaresView;
     private SquaresState gameState;
 
+    /**
+     * SquaresController
+     * Constructor for SquaresController object.
+     *
+     * @param sv view being interacted with
+     */
     public SquaresController(SquaresView sv) {
         squaresView = sv;
         gameState = squaresView.getSquaresState();
     }
 
+    /**
+     * onClick
+     * Handles button inputs.
+     *
+     * @param view button being pressed
+     */
     @Override
     public void onClick(View view) {
 
         // switch statement just in case
         switch (view.getId()) {
             case R.id.resetButton:
+
+                // reset button sets tiles to null,
+                // prompting squaresView to initialize it again
                 gameState.tiles = null;
         }
 
@@ -27,6 +52,14 @@ public class SquaresController implements View.OnTouchListener, View.OnClickList
         squaresView.invalidate();
     }
 
+    /**
+     * onTouch
+     * Handles touch inputs by searching for the square touched.
+     *
+     * @param view view being touched
+     * @param motionEvent carries information about touch event
+     * @return boolean indicating whether input was processed or not
+     */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         // searches grid to find tapped space
@@ -48,6 +81,15 @@ public class SquaresController implements View.OnTouchListener, View.OnClickList
         return false;
     }
 
+    /**
+     * checkAdjacent
+     * Helper method of onClick, checks if any of the squares
+     * adjacent to the one touched are the empty, swapping them
+     * around if found.
+     *
+     * @param x index of square tapped
+     * @param y index of square tapped
+     */
     protected void checkAdjacent(int x, int y) {
 
         // method variable
