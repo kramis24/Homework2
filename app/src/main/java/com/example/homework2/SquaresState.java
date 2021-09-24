@@ -9,6 +9,6 @@ public class SquaresState {
                                       {13, 14, 15, 0}};
 
     // game state variables
-    public Square tiles[][];
+    public Square tiles[][] = null;
 
 }

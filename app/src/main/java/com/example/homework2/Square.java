@@ -2,20 +2,22 @@ package com.example.homework2;
 
 public class Square {
 
+    public static final int EMPTY = 0;
+
     // public variables for each square, number and positions
     public int number;
-    public float top;
     public float left;
-    public float bottom;
+    public float top;
     public float right;
+    public float bottom;
 
     // constructor
-    public Square(int number, float top, float left, float bottom, float right) {
+    public Square(int number, float left, float top, float right, float bottom) {
 
         this.number = number;
-        this.top    = top;
         this.left   = left;
-        this.bottom = bottom;
+        this.top    = top;
         this.right  = right;
+        this.bottom = bottom;
     }
 }

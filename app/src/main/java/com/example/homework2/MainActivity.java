@@ -12,12 +12,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SquaresController squaresController = new SquaresController();
-
         SquaresView squaresView = findViewById(R.id.squaresView);
-        squaresView.setOnTouchListener(squaresController);
 
         Button resetButton = findViewById(R.id.resetButton);
+
+        SquaresController squaresController = new SquaresController(squaresView);
+        squaresView.setOnTouchListener(squaresController);
         resetButton.setOnClickListener(squaresController);
     }
 }
