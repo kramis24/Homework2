@@ -1,7 +1,5 @@
 package com.example.homework2;
 
-import static java.lang.Math.pow;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -51,8 +49,6 @@ public class SquaresView extends SurfaceView {
         emptyPaint.setColor(0xFFBFBFBF);// light gray
         emptyPaint.setStyle(Paint.Style.FILL);
 
-        setBackgroundColor(0xFF00FFFF);// electric cyan
-
         // initialize game state
         gameState = new SquaresState();
     }
@@ -84,13 +80,23 @@ public class SquaresView extends SurfaceView {
         // setting tet size
         numberPaint.setTextSize(gridHeight / 8);
 
-        // drawing grid outline
-        canvas.drawRect(gridLeft, gridTop, gridRight, gridBottom, outlinePaint);
-
         // initialize tiles if none are found
         if (gameState.tiles == null) {
             initializeTiles();
         }
+
+        // setting background color, green if win condition met
+        if (checkWin()) {
+            setBackgroundColor(Color.GREEN);
+        }
+
+        // cyan otherwise
+        else {
+            setBackgroundColor(Color.CYAN);
+        }
+
+        // drawing grid outline
+        canvas.drawRect(gridLeft, gridTop, gridRight, gridBottom, outlinePaint);
 
         // drawing tiles
         for (int i = 0; i < gameState.tiles.length; i++) {
@@ -155,5 +161,19 @@ public class SquaresView extends SurfaceView {
 
     public SquaresState getSquaresState() {
         return gameState;
+    }
+
+    protected boolean checkWin() {
+
+        // looks for tiles that don't match
+        for (int i = 0; i < gameState.tiles.length; i++) {
+            for (int j = 0; j < gameState.tiles[i].length; j++) {
+                if (gameState.tiles[i][j].number != gameState.WIN_TILES[i][j]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
