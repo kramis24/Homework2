@@ -17,6 +17,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+        <TextView
+            android:id="@+id/sizeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grid Size" />
+
+        <SeekBar
+            android:id="@+id/sizeSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:min="4"
+            android:progress="4" />
+
         <Button
             android:id="@+id/resetButton"
             android:layout_width="match_parent"

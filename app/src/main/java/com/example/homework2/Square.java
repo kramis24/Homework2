@@ -4,9 +4,10 @@ package com.example.homework2;
  * Defines variables for the squares in the grid as objects.
  *
  * @author Dylan Kramis
- * @version 9/24/2021 Basic Version
+ * @version 9/26/2021 Variable Size FINAL
  *
- * Enhancements: none yet, size slider planned
+ * Enhancements: size seek bar added to control size, 4x4 to 10x10
+ * grids available, default is 4x4
  * Issues: resets when screen rotates
  */
 

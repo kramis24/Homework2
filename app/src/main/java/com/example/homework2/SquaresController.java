@@ -4,18 +4,21 @@ package com.example.homework2;
  * Controller of squares puzzle, handles inputs.
  *
  * @author Dylan Kramis
- * @version 9/24/2021 Basic Version
+ * @version 9/26/2021 Variable Size FINAL
  *
- * Enhancements: none yet, size slider planned
+ * Enhancements: size seek bar added to control size, 4x4 to 10x10
+ * grids available, default is 4x4
  * Issues: resets when screen rotates
  */
 
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.SeekBar;
 
 import androidx.core.view.TintableBackgroundView;
 
-public class SquaresController implements View.OnTouchListener, View.OnClickListener {
+public class SquaresController implements View.OnTouchListener, View.OnClickListener,
+        SeekBar.OnSeekBarChangeListener {
     private SquaresView squaresView;
     private SquaresState gameState;
 
@@ -145,5 +148,48 @@ public class SquaresController implements View.OnTouchListener, View.OnClickList
                 return;
             }
         }
+    }
+
+    /**
+     * onProgressChanged
+     * Handles seek bar inputs.
+     *
+     * @param seekBar object being interacted with
+     * @param i new progress
+     * @param b whether or not change came from user
+     */
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+        // error/object check
+        if (seekBar.getId() == R.id.sizeSeekBar) {
+
+            // sets new gridSize and resets grid before invalidating
+            squaresView.gridSize = i;
+            gameState.tiles = null;
+            squaresView.invalidate();
+        }
+    }
+
+    /**
+     * onStartTrackingTouch
+     * Unused, just necessary to qualify as a listener for SeekBar objects.
+     *
+     * @param seekBar object being interacted with
+     */
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        // unused
+    }
+
+    /**
+     * onStopTrackingTouch
+     * Unused, just necessary to qualify as a listener for SeekBar objects
+     *.
+     * @param seekBar object being interacted with
+     */
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        // unused
     }
 }

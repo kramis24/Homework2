@@ -4,9 +4,10 @@ package com.example.homework2;
  * View of squares puzzle, draws the puzzle in its current state.
  *
  * @author Dylan Kramis
- * @version 9/24/2021 Basic Version
+ * @version 9/26/2021 Variable Size FINAL
  *
- * Enhancements: none yet, size slider planned
+ * Enhancements: size seek bar added to control size, 4x4 to 10x10
+ * grids available, default is 4x4
  * Issues: resets when screen rotates
  */
 
@@ -79,6 +80,10 @@ public class SquaresView extends SurfaceView {
      */
     @SuppressLint("DrawAllocation")
     public void onDraw(Canvas canvas) {
+
+        // setting win condition
+        gameState.winTiles = generateWin();
+
         // setting center
         centerVertical   = this.getHeight() / 2;
         centerHorizontal = this.getWidth()  / 2;
@@ -101,8 +106,8 @@ public class SquaresView extends SurfaceView {
         gridRight = centerHorizontal + (gridWidth / 2);
         gridBottom = centerVertical + (gridHeight / 2);
 
-        // setting tet size
-        numberPaint.setTextSize(gridHeight / 8);
+        // setting text size
+        numberPaint.setTextSize(gridHeight / (gridSize * 2));
 
         // initialize tiles if none are found
         if (gameState.tiles == null) {
@@ -152,7 +157,7 @@ public class SquaresView extends SurfaceView {
                      sq.bottom - 5, squarePaint);
 
             canvas.drawText(Integer.toString(sq.number), (sq.left + sq.right) / 2,
-                          sq.bottom - (gridHeight / 16), numberPaint);
+                          sq.bottom - (gridHeight / (gridSize * 4)), numberPaint);
         }
     }
 
@@ -226,12 +231,44 @@ public class SquaresView extends SurfaceView {
         // looks for tiles that don't match
         for (int i = 0; i < gameState.tiles.length; i++) {
             for (int j = 0; j < gameState.tiles[i].length; j++) {
-                if (gameState.tiles[i][j].number != gameState.WIN_TILES[i][j]) {
+                if (gameState.tiles[i][j].number != gameState.winTiles[i][j]) {
                     return false;
                 }
             }
         }
 
         return true;
+    }
+
+    /**
+     * generateWin
+     * Generates the win condition for every possible size.
+     *
+     * @return new win condition
+     */
+    protected int[][] generateWin() {
+
+        // method variables
+        int win[][] = new int[gridSize][gridSize];
+        int count = 1;
+
+        // generation using for loops, sets each spot to count
+        // unless count is equal to gridsize squared and iterates
+        // count by 1 each time
+        for (int i = 0; i < win.length; i++) {
+            for(int j = 0; j < win[i].length; j++) {
+                if (count == gridSize * gridSize) {
+                    win[i][j] = 0;
+                }
+                else {
+                    win[i][j] = count;
+                }
+
+                count++;
+            }
+        }
+
+        // returns completed array
+        return win;
     }
 }
